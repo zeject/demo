@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <style>
+        body {
+            width: 80%;
+            margin: 0 auto;
+        }
+        
+        section {
+            height: 400px;
+            margin: 10px 0;
+            background: #acacc3;
+        }
+        
+        .scroll {
+            display: none;
+            position: fixed;
+            right: calc(10% - 55px);
+            bottom: 30%;
+            width: 50px;
+        }
+        
+        .scroll div {
+            height: 40px;
+            line-height: 40px;
+            text-align: center;
+            margin: 1px 0;
+            background: #acaee3;
+        }
+        
+        .scroll div:hover {
+            background: #a0a0ee;
+        }
+        
+        .back {
+            background: #cacac3 !important;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="scroll">
+        <div id="scr1">click1</div>
+        <div id="scr2">click2</div>
+        <div id="scr3">click3</div>
+        <div id="scr4">click4</div>
+        <div id="scr5">click5</div>
+    </div>
+    <section id="id1"></section>
+    <section id="id2"></section>
+    <section id="id3"></section>
+    <section id="id4"></section>
+    <section id="id5"></section>
+    <script>
+        window.onscroll = function () {
+            var top = document.body.scrollTop;
+            if (top > 300) {
+                document.getElementsByClassName('scroll')[0].style.display = 'block';
+                check(top);
+            } else {
+                document.getElementsByClassName('scroll')[0].style.display = 'none';
+            }
+        }
+
+        function check(top) {
+            var len = document.getElementsByClassName('scroll')[0].getElementsByTagName('div').length;
+
+            var sel;
+            for (var i = 1; i <= len; i++) {
+                var el = document.getElementById('id' + i);
+                var scr = document.getElementById('scr' + i);
+                scr.className = '';
+                if (el.offsetTop <= top) {
+                    sel = scr;
+                }
+                console.log(el.offsetTop);
+            }
+            sel.className = 'back';
+        }
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<script src="angular.js"></script>
+</head>
+<body ng-app="app">
+	<div dom-repeat="4"><span>123123</span></div>
+	<script>
+		var app = angular.module('app', []);
+		app.directive('domRepeat', function () {
+			return {
+				restrict: 'A',
+				link: function (scope, iElement, iAttrs) {
+					console.log(iElement);
+					var html = '';
+					for (var i = 1; i < iAttrs.domRepeat; i++) {
+						html += iElement[0].outerHTML;
+					}
+					iElement.after(html);
+				}
+			};
+		});
+	</script>
+</body>
+</html>
